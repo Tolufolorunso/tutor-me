@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const Category = require("../models/categoryModel");
-// const Subject = require("../models/subjectsModel");
+// const Category = require("../models/categoryModel");
+const Subject = require("../models/subjectsModel");
 
 class Helper {
   addSubjectToCategory(subjectId, categoryId) {
