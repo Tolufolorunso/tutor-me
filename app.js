@@ -18,7 +18,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "tutoring app built with love",
-    app: "tutoring-app",
+    app: "tutor us",
   });
 });
 
