@@ -17,11 +17,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide password"],
     minlength: 2,
+    select: false,
   },
   passwordConfirm: {
     type: String,
     required: [true, "Please provide password"],
   },
+  role: {
+    type: String,
+    default: "user",
+    enum: ["user", "tutor", "admin"],
+  },
+  passwordChangedAt: Date,
 });
 
 userSchema.pre("save", async function (next) {
@@ -29,7 +36,28 @@ userSchema.pre("save", async function (next) {
 
   this.password = await bcrypt.hash(this.password, 12);
 
+  this.passwordConfirm = undefined;
+
   next();
 });
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    console.log(changedTimestamp, JWTTimestamp);
+    return JWTTimestamp < changedTimestamp;
+  }
+
+  return false;
+};
 
 module.exports = mongoose.model("User", userSchema);
