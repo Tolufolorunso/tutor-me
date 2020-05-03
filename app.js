@@ -8,7 +8,7 @@ const globalErrorHandler = require("./controllers/errorController");
 
 //My modules
 // const subjectsRouter = require("./routes/subjectsRoutes");
-// const categoryRouter = require("./routes/categoriesRoutes");
+const categoryRouter = require("./routes/categoryRoutes");
 const usersRouter = require("./routes/userRoutes");
 
 dotenv.config({
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 
 // app.use("/api/v1/subjects", subjectsRouter);
-// app.use("/api/v1/category", categoryRouter);
+app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/users", usersRouter);
 
 //HOMEPAGE route
