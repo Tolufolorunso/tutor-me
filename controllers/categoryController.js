@@ -23,8 +23,8 @@ exports.getCategory = catchAsync(async (req, res) => {
 exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
   const categoryId = req.params.id;
   const subjects = await Subject.find({ category: categoryId });
-
-  if (!subject) {
+  console.log(subjects);
+  if (!subjects) {
     return next(
       new AppError(
         "Subjects are not found under this category, contact the admin",
@@ -42,6 +42,45 @@ exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
     data: {
       subjects,
     },
+  });
+});
+
+exports.updateSubjectInCategory = catchAsync(async (req, res, next) => {
+  const subjects = await Subject.find({ category: req.params.categoryId });
+
+  const subjectId = subjects.find((subId) => {
+    return subId._id !== req.params.subjectId;
+  })._id;
+
+  await Subject.findByIdAndUpdate(subjectId, req.body);
+
+  res.status(200).json({
+    status: "success",
+    message: "Data updated successfully",
+  });
+});
+
+exports.deleteSubjectInCategory = catchAsync(async (req, res, next) => {
+  const subjects = await Subject.find({ category: req.params.categoryId });
+
+  if (!subjects.length) {
+    return next(
+      new AppError(
+        "Subjects are not found under this category, contact the admin",
+        404
+      )
+    );
+  }
+
+  const subjectId = subjects.find((subId) => {
+    return subId._id !== req.params.subjectId;
+  })._id;
+
+  await Subject.findByIdAndDelete(subjectId);
+
+  res.status(200).json({
+    status: "success",
+    message: "Data deleted successfully",
   });
 });
 
@@ -85,15 +124,5 @@ exports.deleteCategory = catchAsync(async (req, res, next) => {
         data: null,
       });
     }
-  });
-});
-
-exports.updateSubjectInCategory = catchAsync(async (req, res, next) => {
-  const newCategory = await Category.create(req.body);
-  res.status(201).json({
-    status: "success",
-    data: {
-      category: newCategory,
-    },
   });
 });

@@ -29,11 +29,16 @@ router
   );
 
 router
-  .route("/id/subjects/:id")
+  .route("/:categoryId/subjects/:subjectId")
   .patch(
     authController.authorize,
-    authController.authorizeAdmin,
+    authController.authorizeAdmin("admin"),
     categoryController.updateSubjectInCategory
+  )
+  .delete(
+    authController.authorize,
+    authController.authorizeAdmin("admin"),
+    categoryController.deleteSubjectInCategory
   );
 
 module.exports = router;
