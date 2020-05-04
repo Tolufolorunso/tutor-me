@@ -10,6 +10,7 @@ const globalErrorHandler = require("./controllers/errorController");
 const subjectsRouter = require("./routes/subjectsRoutes");
 const categoryRouter = require("./routes/categoryRoutes");
 const usersRouter = require("./routes/userRoutes");
+const adminRouter = require("./routes/adminRoutes");
 
 dotenv.config({
   path: "./config.env",
@@ -25,6 +26,7 @@ app.use(express.json());
 
 app.use("/api/v1/subjects", subjectsRouter);
 app.use("/api/v1/category", categoryRouter);
+app.use("/api/v1/admin", adminRouter);
 
 // app.use("/api/v1/subjects", subjectsRouter);
 app.use("/api/v1/categories", categoryRouter);
