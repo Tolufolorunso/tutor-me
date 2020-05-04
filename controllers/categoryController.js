@@ -1,5 +1,5 @@
 const Category = require("../models/categoryModel");
-// const Subject = require("../models/subjectsModel");
+const Subject = require("../models/subject");
 const Helper = require("../utils/helperFunction");
 
 const AppError = require("../utils/appError");
@@ -7,6 +7,11 @@ const catchAsync = require("../utils/catchAsync");
 
 exports.getCategory = catchAsync(async (req, res) => {
   const category = await Category.find();
+
+  if (!category) {
+    return next(new AppError("Category not found", 404));
+  }
+
   res.status(200).json({
     status: "success",
     lenght: category.length,
@@ -15,8 +20,32 @@ exports.getCategory = catchAsync(async (req, res) => {
     },
   });
 });
+exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
+  const categoryId = req.params.id;
+  const subjects = await Subject.find({ category: categoryId });
 
-exports.createCategory = async (req, res) => {
+  if (!subject) {
+    return next(
+      new AppError(
+        "Subjects are not found under this category, contact the admin",
+        404
+      )
+    );
+  }
+
+  const categoryName = subjects[0].category_name;
+  // console.log(categoryName);
+  res.status(200).json({
+    status: "success",
+    lenght: subjects.length,
+    category: categoryName,
+    data: {
+      subjects,
+    },
+  });
+});
+
+exports.createCategory = async (req, res, next) => {
   try {
     const newCategory = await Category.create(req.body);
     res.status(201).json({
@@ -46,13 +75,22 @@ exports.updateCategory = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteCategory = catchAsync(async (req, res) => {
+exports.deleteCategory = catchAsync(async (req, res, next) => {
   const category = await Category.findByIdAndDelete(req.params.id);
+
+  if (!category) {
+    return next(
+      new AppError("Subjects nor Category are found, contact the admin", 404)
+    );
+  }
+
   await Subject.deleteMany({ category: category._id }, (error, data) => {
-    if (data.ok === 1) console.log("deletd successfully");
-  });
-  res.status(204).json({
-    status: "success",
-    data: null,
+    if (data.ok) {
+      res.status(204).json({
+        status: "success",
+        message: "all subjects deleted successfully with the category",
+        data: null,
+      });
+    }
   });
 });
