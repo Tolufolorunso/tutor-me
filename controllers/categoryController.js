@@ -1,5 +1,5 @@
 const Category = require("../models/categoryModel");
-const Subject = require("../models/subject");
+const Subject = require("../models/subjectsModel");
 const Helper = require("../utils/helperFunction");
 
 const AppError = require("../utils/appError");
