@@ -27,7 +27,7 @@ app.use(express.json());
 app.use("/api/v1/subjects", subjectsRouter);
 app.use("/api/v1/category", categoryRouter);
 =======
-// app.use("/api/v1/subjects", subjectsRouter);
+app.use("/api/v1/subjects", subjectsRouter);
 app.use("/api/v1/categories", categoryRouter);
 >>>>>>> category
 app.use("/api/v1/users", usersRouter);
