@@ -28,4 +28,12 @@ router
     categoryController.deleteCategory
   );
 
+router
+  .route("/id/subjects/:id")
+  .patch(
+    authController.authorize,
+    authController.authorizeAdmin,
+    categoryController.updateSubjectInCategory
+  );
+
 module.exports = router;

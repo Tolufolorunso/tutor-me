@@ -34,7 +34,7 @@ exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
   }
 
   const categoryName = subjects[0].category_name;
-  // console.log(categoryName);
+
   res.status(200).json({
     status: "success",
     lenght: subjects.length,
@@ -45,29 +45,22 @@ exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
   });
 });
 
-exports.createCategory = async (req, res, next) => {
-  try {
-    const newCategory = await Category.create(req.body);
-    res.status(201).json({
-      status: "success",
-      data: {
-        category: newCategory,
-      },
-    });
-  } catch {
-    res.status(400).json({
-      status: "fail",
-      message: "not allowed",
-    });
-  }
-};
+exports.createCategory = catchAsync(async (req, res, next) => {
+  const newCategory = await Category.create(req.body);
+  res.status(201).json({
+    status: "success",
+    data: {
+      category: newCategory,
+    },
+  });
+});
 
 exports.updateCategory = catchAsync(async (req, res) => {
   const categoryUpdated = await Category.findByIdAndUpdate(
     req.params.id,
     req.body
   );
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     data: {
       category: categoryUpdated,
@@ -92,5 +85,15 @@ exports.deleteCategory = catchAsync(async (req, res, next) => {
         data: null,
       });
     }
+  });
+});
+
+exports.updateSubjectInCategory = catchAsync(async (req, res, next) => {
+  const newCategory = await Category.create(req.body);
+  res.status(201).json({
+    status: "success",
+    data: {
+      category: newCategory,
+    },
   });
 });
