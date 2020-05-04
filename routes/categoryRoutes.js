@@ -12,6 +12,8 @@ router
     categoryController.createCategory
   );
 
+router.route("/:id/subjects").get(categoryController.getAllSubjectsInCategory);
+
 router
   .route("/:id")
   .get(authController.authorize, categoryController.getCategory)
@@ -24,6 +26,19 @@ router
     authController.authorize,
     authController.authorizeAdmin("admin"),
     categoryController.deleteCategory
+  );
+
+router
+  .route("/:categoryId/subjects/:subjectId")
+  .patch(
+    authController.authorize,
+    authController.authorizeAdmin("admin"),
+    categoryController.updateSubjectInCategory
+  )
+  .delete(
+    authController.authorize,
+    authController.authorizeAdmin("admin"),
+    categoryController.deleteSubjectInCategory
   );
 
 module.exports = router;
