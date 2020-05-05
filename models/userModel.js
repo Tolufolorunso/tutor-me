@@ -28,6 +28,13 @@ const userSchema = new mongoose.Schema({
     default: "user",
     enum: ["user", "tutor", "admin"],
   },
+  active: {
+    type: Boolean,
+    default: true,
+  },
+  subjects: {
+    type: Array,
+  },
   passwordChangedAt: Date,
 });
 
