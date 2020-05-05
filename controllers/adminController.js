@@ -8,7 +8,6 @@ const catchAsync = require("../utils/catchAsync");
 
 exports.getAllTutors = catchAsync(async (req, res, next) => {
   const tutors = await User.find({ role: "tutor" }).select("-__v");
-  console.log(tutors);
   if (!tutors) {
     return next(new AppError("Tutors are not available inside DB", 404));
   }
@@ -23,15 +22,7 @@ exports.getAllTutors = catchAsync(async (req, res, next) => {
 });
 
 exports.getTutor = catchAsync(async (req, res, next) => {
-  const tutor = await User.findOne({
-    role: "tutor",
-    _id: req.params.tutorId,
-  }).select("-__v");
-  console.log(tutor);
-  if (!tutor) {
-    return next(new AppError("Tutor is not found", 404));
-  }
-
+  const tutor = res.tutor;
   res.status(200).json({
     status: "success",
     data: {
@@ -39,12 +30,10 @@ exports.getTutor = catchAsync(async (req, res, next) => {
     },
   });
 });
-exports.deactivateTutor = catchAsync(async (req, res, next) => {
-  const tutor = await User.findByIdAndDelete(req.params.tutorId).select("-__v");
-  if (!tutor) {
-    return next(new AppError("Tutor is not found", 404));
-  }
 
+exports.deactivateTutor = catchAsync(async (req, res, next) => {
+  res.tutor.active = false;
+  await res.tutor.save({ validateBeforeSave: false });
   res.status(200).json({
     status: "success",
     data: {

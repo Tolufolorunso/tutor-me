@@ -67,4 +67,9 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   return false;
 };
 
+userSchema.pre("find", function (next) {
+  this.find({ active: { $ne: false } });
+  next();
+});
+
 module.exports = mongoose.model("User", userSchema);

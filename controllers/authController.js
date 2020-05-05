@@ -62,7 +62,6 @@ exports.authorize = catchAsync(async (req, res, next) => {
   );
 
   const currentUser = await User.findById(decodedToken.id);
-  // console.log(currentUser);
   if (!currentUser) {
     return next(new AppError("The user doesnt exists", 401));
   }
@@ -78,7 +77,6 @@ exports.authorize = catchAsync(async (req, res, next) => {
 
 exports.authorizeAdmin = (...roles) => {
   return (req, res, next) => {
-    // console.log("user: ", req.user);
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError("You do not have access to perform the operation!", 403)
