@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const Subject = require("../models/subjectsModel");
 
 class Helper {
-  addSubjectToCategory(subjectId, categoryId) {
-    return Subject.findByIdAndUpdate(
+  async addSubjectToCategory(subjectId, categoryId) {
+    return await Subject.findByIdAndUpdate(
       subjectId,
       { category: categoryId },
       { new: true, useFindAndModify: false }

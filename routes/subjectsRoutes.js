@@ -7,9 +7,6 @@ router
   .get(subjectsController.getAllSubject)
   .post(subjectsController.createSubject);
 
-// router
-//   .route("/")
-//   .patch(subjectsController.updateSubject)
-//   .delete(subjectsController.deleteSubject);
+router.route("/register/:id").patch(subjectsController.registerSubject);
 
 module.exports = router;

@@ -15,6 +15,17 @@ exports.getAllSubject = catchAsync(async (req, res) => {
   });
 });
 
+exports.registerSubject = catchAsync(async (req, res) => {
+  console.log(req.user);
+  res.status(200).json({
+    status: "success",
+    // results: subject.length,
+    // data: {
+    //   subject: subject,
+    // },
+  });
+});
+
 exports.createSubject = catchAsync(async (req, res) => {
   const newSubject = await Subject.create(req.body);
   //   console.log(newSubject.category_name);
