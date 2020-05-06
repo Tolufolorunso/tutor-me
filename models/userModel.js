@@ -25,16 +25,22 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "user",
+    required: true,
     enum: ["user", "tutor", "admin"],
   },
   active: {
     type: Boolean,
     default: true,
   },
-  subjects: {
-    type: Array,
-  },
+  // subjects: {
+  //   type: Array,
+  // },
+  subjects: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Subject",
+    },
+  ],
   passwordChangedAt: Date,
 });
 

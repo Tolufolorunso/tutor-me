@@ -8,7 +8,7 @@ router
   .get(authController.authorize, categoryController.getCategory)
   .post(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     categoryController.createCategory
   );
 
@@ -19,12 +19,12 @@ router
   .get(authController.authorize, categoryController.getCategory)
   .patch(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     categoryController.updateCategory
   )
   .delete(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     categoryController.deleteCategory
   );
 
@@ -32,12 +32,12 @@ router
   .route("/:categoryId/subjects/:subjectId")
   .patch(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     categoryController.updateSubjectInCategory
   )
   .delete(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     categoryController.deleteSubjectInCategory
   );
 

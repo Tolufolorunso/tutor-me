@@ -9,7 +9,7 @@ router
   .route("/")
   .get(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     lessonsController.getAllLessons
   )
   .post(authController.authorize, lessonsController.createLesson);
@@ -18,19 +18,19 @@ router
   .route("/:id")
   .get(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     getLesson,
     lessonsController.getALesson
   )
   .patch(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     getLesson,
     lessonsController.updateALesson
   )
   .delete(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     getLesson,
     lessonsController.deleteALesson
   );

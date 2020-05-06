@@ -1,7 +1,4 @@
-const User = require("../models/userModels");
-// const User = require("../models/userModels");
-
-console.log(User);
+const User = require("models/userModel");
 
 const user = {
   name: "Tolulope Folorunso",

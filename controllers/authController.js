@@ -4,7 +4,10 @@ const User = require("../models/userModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
-exports.signup = catchAsync(async (req, res, next) => {
+exports.signupUser = catchAsync(async (req, res, next) => {
+  req.body.role = "user";
+  console.log(req.body);
+
   const newUser = await User.create(req.body);
   const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -15,6 +18,22 @@ exports.signup = catchAsync(async (req, res, next) => {
     token,
     data: {
       user: newUser,
+    },
+  });
+});
+
+exports.signupTutor = catchAsync(async (req, res, next) => {
+  req.body.role = "tutor";
+  const newTutor = await User.create(req.body);
+  const token = jwt.sign({ id: newTutor._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+
+  res.status(201).json({
+    status: "success",
+    token,
+    data: {
+      user: newTutor,
     },
   });
 });
@@ -75,7 +94,7 @@ exports.authorize = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.authorizeAdmin = (...roles) => {
+exports.authorizeFor = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(

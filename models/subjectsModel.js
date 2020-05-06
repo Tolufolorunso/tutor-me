@@ -10,7 +10,7 @@ const subjectSchema = new mongoose.Schema({
   },
   category_name: {
     type: String,
-    // required: [true, "category require"],
+    required: [true, "category require"],
     uppercase: true,
     trim: true,
     min: [2, "Name is too short!"],
@@ -20,6 +20,11 @@ const subjectSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "categories",
   },
+});
+
+subjectSchema.pre("save", async function (next) {
+  console.log(this);
+  next();
 });
 
 module.exports = mongoose.model("Subject", subjectSchema);

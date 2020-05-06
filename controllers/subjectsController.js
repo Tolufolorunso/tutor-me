@@ -3,9 +3,11 @@ const Category = require("../models/categoryModel");
 const Helper = require("../utils/helperFunction");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
+const User = require("../models/userModel");
 
 exports.getAllSubject = catchAsync(async (req, res) => {
   const subject = await Subject.find();
+
   res.status(200).json({
     status: "success",
     results: subject.length,
@@ -15,21 +17,53 @@ exports.getAllSubject = catchAsync(async (req, res) => {
   });
 });
 
-exports.registerSubject = catchAsync(async (req, res) => {
-  console.log(req.user);
+exports.registerSubject = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.user._id, {
+    $push: { subjects: req.params.subjectId },
+  }).exec(function (e, data) {
+    console.log(data);
+  });
+  // console.log(req.params.subjectId);
   res.status(200).json({
     status: "success",
-    // results: subject.length,
+    data: {
+      // subject: subject,
+    },
+  });
+});
+exports.getTutorSubjects = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id).populate({
+    path: "subjects",
+    select: "-__v",
+  });
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      subject: user,
+    },
+  });
+});
+
+exports.deleteTutorSubjects = catchAsync(async (req, res, next) => {
+  console.log(req.params);
+  const deletedSubject = await User.findByIdAndUpdate(
+    { _id: req.user._id },
+    { $pull: { subjects: req.params.subjectId } }
+  );
+
+  console.log(deletedSubject);
+
+  res.status(200).json({
+    status: "success",
     // data: {
     //   subject: subject,
     // },
   });
 });
 
-exports.createSubject = catchAsync(async (req, res) => {
+exports.createSubject = catchAsync(async (req, res, next) => {
   const newSubject = await Subject.create(req.body);
-  //   console.log(newSubject.category_name);
-
   Category.findOne(
     {
       name: newSubject.category_name,

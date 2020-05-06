@@ -8,7 +8,7 @@ const { getATutor } = require("../utils/middleware");
 router.get(
   "/",
   authController.authorize,
-  authController.authorizeAdmin("admin"),
+  authController.authorizeFor("admin"),
   async (req, res, next) => {
     const admin = await User.findOne({ role: "admin" }).select("-__v");
     if (!admin) {
@@ -27,7 +27,7 @@ router
   .route("/get-tutors")
   .get(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     adminController.getAllTutors
   );
 
@@ -36,7 +36,7 @@ router
   .get(authController.authorize, getATutor, adminController.getTutor)
   .delete(
     authController.authorize,
-    authController.authorizeAdmin("admin"),
+    authController.authorizeFor("admin"),
     getATutor,
     adminController.deactivateTutor
   );

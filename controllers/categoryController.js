@@ -86,6 +86,10 @@ exports.deleteSubjectInCategory = catchAsync(async (req, res, next) => {
 
 exports.createCategory = catchAsync(async (req, res, next) => {
   const newCategory = await Category.create(req.body);
+  console.log(newCategory);
+  if (!newCategory) {
+    return next(new AppError("lesson error", 404));
+  }
   res.status(201).json({
     status: "success",
     data: {
