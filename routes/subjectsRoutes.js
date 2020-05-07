@@ -37,15 +37,3 @@ router
   );
 
 module.exports = router;
-
-// async function (req, res, next) {
-//   console.log(req.body.name, req.body.category_name);
-//   return (await Subject.find({
-//     name: req.body.name,
-//     category_name: req.body.category_name,
-//   }))
-//     ? next(
-//       new AppError("You do not have access to perform the operation!", 403)
-//     )
-//     : next();
-// },

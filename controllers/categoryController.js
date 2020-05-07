@@ -22,6 +22,7 @@ exports.getCategory = catchAsync(async (req, res) => {
 });
 exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
   const categoryId = req.params.id;
+  // console.log(reg.query.name);
   const subjects = await Subject.find({ category: categoryId });
   console.log(subjects);
   if (!subjects) {
@@ -41,6 +42,30 @@ exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
     category: categoryName,
     data: {
       subjects,
+    },
+  });
+});
+
+exports.getASubjectInCategory = catchAsync(async (req, res, next) => {
+  // const subjects = await Subject.find({ category: req.params.categoryId });
+  const { catId, subId } = req.params;
+  const subjects = await Subject.find({ category: catId });
+
+  if (!subjects.length) {
+    return next(
+      new AppError(
+        "Subjects are not found under this category, contact the admin",
+        404
+      )
+    );
+  }
+
+  const subject = subjects.find((el) => el._id !== subId);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      subject,
     },
   });
 });

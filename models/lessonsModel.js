@@ -4,14 +4,10 @@ const lessonSchema = new mongoose.Schema({
   user: {
     type: String,
     required: true,
+    trim: true,
   },
   userID: {
     type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  tutor: {
-    type: String,
     ref: "User",
     required: true,
   },

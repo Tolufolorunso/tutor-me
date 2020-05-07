@@ -15,6 +15,10 @@ router
 router.route("/:id/subjects").get(categoryController.getAllSubjectsInCategory);
 
 router
+  .route("/:catId/subjects/:subId")
+  .get(authController.authorize, categoryController.getASubjectInCategory);
+
+router
   .route("/:id")
   .get(authController.authorize, categoryController.getCategory)
   .patch(

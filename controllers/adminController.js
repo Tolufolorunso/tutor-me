@@ -2,12 +2,18 @@ const Category = require("../models/categoryModel");
 const Subject = require("../models/subjectsModel");
 const User = require("../models/userModel");
 const Helper = require("../utils/helperFunction");
+const Api = require("../utils/api");
 
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getAllTutors = catchAsync(async (req, res, next) => {
-  const tutors = await User.find({ role: "tutor" }).select("-__v");
+  // const tutors = await User.find({ role: "tutor" }).select("-__v");
+  const allTutors = new Api(User.find({ role: "tutor" }), req.query)
+    .filter()
+    .sort("firstname");
+  const tutors = await allTutors.query;
+
   if (!tutors) {
     return next(new AppError("Tutors are not available inside DB", 404));
   }

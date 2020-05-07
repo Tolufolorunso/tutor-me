@@ -106,7 +106,8 @@ exports.authorizeFor = (...roles) => {
 };
 
 const user = {
-  name: "Tolulope Folorunso",
+  firstname: "Tolulope",
+  surname: "Folorunso",
   email: "admin@yahoo.com",
   password: "123",
   passwordConfirm: "123",

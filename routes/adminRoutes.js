@@ -27,7 +27,7 @@ router
   .route("/get-tutors")
   .get(
     authController.authorize,
-    authController.authorizeFor("admin"),
+    authController.authorizeFor("admin", "user"),
     adminController.getAllTutors
   );
 
