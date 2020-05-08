@@ -5,23 +5,18 @@ const adminController = require("../controllers/adminController");
 const User = require("../models/userModel");
 const { getATutor } = require("../utils/middleware");
 
-router.get(
-  "/",
-  authController.authorize,
-  authController.authorizeFor("admin"),
-  async (req, res, next) => {
-    const admin = await User.findOne({ role: "admin" }).select("-__v");
-    if (!admin) {
-      return next(new AppError("something went wrong", 500));
-    }
-    res.status(200).json({
-      status: "success",
-      data: {
-        admin,
-      },
-    });
+router.get("/", authController.authorize, async (req, res, next) => {
+  const user = await User.findById(req.user._id).select("-__v");
+  if (!user) {
+    return next(new AppError("something went wrong", 500));
   }
-);
+  res.status(200).json({
+    status: "success",
+    data: {
+      user,
+    },
+  });
+});
 
 router
   .route("/get-tutors")

@@ -41,13 +41,13 @@ app.use(express.json());
 
 app.use("/api/v1/subjects", subjectsRouter);
 app.use("/api/v1/category", categoryRouter);
-app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/user", usersRouter);
 app.use("/api/v1/lessons", lessonsRouter);
 
 // app.use("/api/v1/subjects", subjectsRouter);
 app.use("/api/v1/categories", categoryRouter);
 
-app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/users", adminRouter);
 
 //HOMEPAGE route
 app.get("/", (req, res) => {

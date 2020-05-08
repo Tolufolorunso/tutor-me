@@ -25,15 +25,12 @@ exports.registerSubject = catchAsync(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(req.user._id, {
     $push: { subjects: req.params.subjectId },
   }).exec(function (e, data) {
-    console.log(data);
+    res.status(200).json({
+      status: "success",
+      message: "subject added",
+    });
   });
   // console.log(req.params.subjectId);
-  res.status(200).json({
-    status: "success",
-    data: {
-      // subject: subject,
-    },
-  });
 });
 exports.getTutorSubjects = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id).populate({
@@ -56,13 +53,14 @@ exports.deleteTutorSubjects = catchAsync(async (req, res, next) => {
     { $pull: { subjects: req.params.subjectId } }
   );
 
-  console.log(deletedSubject);
+  if (!deletedSubject.subjects.length) {
+    return next(new AppError("No subject to be deleted", 400));
+  }
+  console.log(deletedSubject.subjects.length);
 
   res.status(200).json({
     status: "success",
-    // data: {
-    //   subject: subject,
-    // },
+    message: "Deleted successfully",
   });
 });
 

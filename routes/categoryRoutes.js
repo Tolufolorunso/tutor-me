@@ -12,7 +12,9 @@ router
     categoryController.createCategory
   );
 
-router.route("/:id/subjects").get(categoryController.getAllSubjectsInCategory);
+router
+  .route("/:id/subjects")
+  .get(authController.authorize, categoryController.getAllSubjectsInCategory);
 
 router
   .route("/:catId/subjects/:subId")
