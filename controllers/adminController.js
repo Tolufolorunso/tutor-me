@@ -12,6 +12,7 @@ exports.getAllTutors = catchAsync(async (req, res, next) => {
   const allTutors = new Api(User.find({ role: "tutor" }), req.query)
     .filter()
     .sort("firstname");
+
   const tutors = await allTutors.query;
 
   if (!tutors) {

@@ -1,7 +1,5 @@
 const Category = require("../models/categoryModel");
 const Subject = require("../models/subjectsModel");
-const Helper = require("../utils/helperFunction");
-
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
@@ -20,9 +18,9 @@ exports.getCategory = catchAsync(async (req, res) => {
     },
   });
 });
+
 exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
   const categoryId = req.params.id;
-  // console.log(reg.query.name);
   const subjects = await Subject.find({ category: categoryId });
   console.log(subjects);
   if (!subjects) {
@@ -47,10 +45,8 @@ exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
 });
 
 exports.getASubjectInCategory = catchAsync(async (req, res, next) => {
-  // const subjects = await Subject.find({ category: req.params.categoryId });
   const { catId, subId } = req.params;
   const subjects = await Subject.find({ category: catId });
-
   if (!subjects.length) {
     return next(
       new AppError(
@@ -59,9 +55,7 @@ exports.getASubjectInCategory = catchAsync(async (req, res, next) => {
       )
     );
   }
-
   const subject = subjects.find((el) => el._id !== subId);
-
   res.status(200).json({
     status: "success",
     data: {
@@ -72,13 +66,10 @@ exports.getASubjectInCategory = catchAsync(async (req, res, next) => {
 
 exports.updateSubjectInCategory = catchAsync(async (req, res, next) => {
   const subjects = await Subject.find({ category: req.params.categoryId });
-
   const subjectId = subjects.find((subId) => {
     return subId._id !== req.params.subjectId;
   })._id;
-
   await Subject.findByIdAndUpdate(subjectId, req.body);
-
   res.status(200).json({
     status: "success",
     message: "Data updated successfully",
@@ -138,13 +129,11 @@ exports.updateCategory = catchAsync(async (req, res) => {
 
 exports.deleteCategory = catchAsync(async (req, res, next) => {
   const category = await Category.findByIdAndDelete(req.params.id);
-
   if (!category) {
     return next(
       new AppError("Subjects nor Category are found, contact the admin", 404)
     );
   }
-
   await Subject.deleteMany({ category: category._id }, (error, data) => {
     if (data.ok) {
       res.status(204).json({

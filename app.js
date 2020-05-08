@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+const rateLimit = require("express-rate-limit");
+const cors = require("cors");
 
 //modules
 const AppError = require("./utils/appError");
@@ -19,9 +21,21 @@ dotenv.config({
 const app = express();
 
 //middleware
+app.use(cors());
+
+app.options("*", cors());
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: "Too many request from this IP",
+});
+
+app.use("/api", limiter);
 
 app.use(express.json());
 

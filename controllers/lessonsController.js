@@ -23,11 +23,9 @@ exports.createLesson = catchAsync(async (req, res, next) => {
   req.body.user = `${req.user.surname} ${req.user.firstname}`;
   req.body.userID = `${req.user._id}`;
   const lesson = await Lesson.create(req.body);
-
   if (!lesson) {
     return next(new AppError("lesson error", 404));
   }
-
   res.status(200).json({
     status: "success",
     data: {
@@ -35,7 +33,6 @@ exports.createLesson = catchAsync(async (req, res, next) => {
     },
   });
 });
-
 exports.getALesson = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
