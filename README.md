@@ -86,7 +86,7 @@ app.all("*", (req, res, next) => {
 ```
 //URL is
 
-/api/v1/users/signup/tutor
+/api/v1/auth/signup/tutor
 {
     "firstname": "dada",
     "surname": "ojo",
@@ -121,7 +121,7 @@ app.all("*", (req, res, next) => {
 ```
 //URL is
 
-/api/v1/users/signup/user
+/api/v1/auth/signup/user
 {
     "firstname": "tolu",
     "surname": "kola",
@@ -156,7 +156,7 @@ app.all("*", (req, res, next) => {
 ```
 //URL is
 
-/api/v1/users/login
+/api/v1/auth/login
 {
 	"email": "eg2@yahoo.com",
 	"password": "123"
