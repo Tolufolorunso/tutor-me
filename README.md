@@ -222,7 +222,7 @@ status code is 201 created
     "data": {
         "category": {
             "_id": "5eb529459adf2d031c394f3b",
-            "name": "PRIMAY",
+            "name": "PRIMARY",
             "description": "This is primary class category",
             "date": "2020-05-08T09:41:26.007Z",
             "__v": 0
