@@ -35,7 +35,7 @@ All the packages needed for this API to works will be installed with this above 
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/fvcproductions/SOMEREPO`
+- Clone this repo to your local machine using `https://github.com/Tolufolorunso/tutor-me`
 
 ### The HTTP verbs used
 
@@ -820,25 +820,7 @@ status code: 200 Ok
 }
 ```
 
-## Setup
-
-- If you want more syntax highlighting, format your code like this:
-
-> update and install this package first
-
-```shell
-$ brew update
-$ brew install fvcproductions
-```
-
-> now install npm and bower packages
-
-```shell
-$ npm install
-$ bower install
-```
-
-- For all the possible languages that support syntax highlithing on GitHub (which is basically all of them), refer <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank">here</a>.
+- Still working on the ReadME and the Project
 
 ---
 
@@ -853,4 +835,4 @@ $ bower install
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2015 © <a href="http://fvcproductions.com" target="_blank">FVCproductions</a>.
+- Copyright 2015 © <a href="http://www.facebook.com/tolu4you" target="_blank">tolulope</a>.
