@@ -1,4 +1,4 @@
-# Please still working on my heroku. my login and signup are working perfectly on my local machine but not working on heroku. others routes seems to work. please help to test it on local machine thanks. if i tried to go to other routes, it prompt me to login. heroku link is https://tranquil-dusk-39240.herokuapp.com/
+# WORKING NOW: heroku link is https://tranquil-dusk-39240.herokuapp.com/api/v1/auth/login
 
 # Tutor-me App
 
