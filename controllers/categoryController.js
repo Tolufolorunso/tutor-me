@@ -22,7 +22,6 @@ exports.getCategory = catchAsync(async (req, res) => {
 exports.getAllSubjectsInCategory = catchAsync(async (req, res) => {
   const categoryId = req.params.id;
   const subjects = await Subject.find({ category: categoryId });
-  console.log(subjects);
   if (!subjects) {
     return next(
       new AppError(
@@ -102,7 +101,6 @@ exports.deleteSubjectInCategory = catchAsync(async (req, res, next) => {
 
 exports.createCategory = catchAsync(async (req, res, next) => {
   const newCategory = await Category.create(req.body);
-  console.log(newCategory);
   if (!newCategory) {
     return next(new AppError("lesson error", 404));
   }

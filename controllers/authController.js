@@ -6,7 +6,6 @@ const catchAsync = require("../utils/catchAsync");
 
 exports.signupUser = catchAsync(async (req, res, next) => {
   req.body.role = "user";
-  console.log(req.body);
 
   const newUser = await User.create(req.body);
   const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {

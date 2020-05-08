@@ -3,7 +3,6 @@ const router = express.Router();
 const authController = require("../controllers/authController");
 const lessonsController = require("../controllers/lessonsController");
 const { getLesson } = require("../utils/middleware");
-console.log(getLesson);
 
 router
   .route("/")

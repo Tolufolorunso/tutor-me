@@ -30,7 +30,6 @@ class Middleware {
       //   _id: req.params.tutorId,
       // });
       tutor = await User.findById(req.params.tutorId);
-      // console.log(tutor);
 
       if (!tutor) {
         return next(new AppError("something went wrong", 500));

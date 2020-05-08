@@ -47,7 +47,6 @@ exports.getTutorSubjects = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteTutorSubjects = catchAsync(async (req, res, next) => {
-  console.log(req.params);
   const deletedSubject = await User.findByIdAndUpdate(
     { _id: req.user._id },
     { $pull: { subjects: req.params.subjectId } }
@@ -56,8 +55,6 @@ exports.deleteTutorSubjects = catchAsync(async (req, res, next) => {
   if (!deletedSubject.subjects.length) {
     return next(new AppError("No subject to be deleted", 400));
   }
-  console.log(deletedSubject.subjects.length);
-
   res.status(200).json({
     status: "success",
     message: "Deleted successfully",
@@ -72,10 +69,14 @@ exports.createSubject = catchAsync(async (req, res, next) => {
     },
     async function (err, category) {
       try {
-        console.log(category._id);
         await Helper.addSubjectToCategory(newSubject._id, category._id);
       } catch {
-        if (err) console.log(err);
+        if (err) {
+          res.status(500).json({
+            status: "error",
+            message: err.message,
+          });
+        }
       }
     }
   );
@@ -89,7 +90,6 @@ exports.createSubject = catchAsync(async (req, res, next) => {
 });
 
 exports.updateSubject = catchAsync(async (req, res) => {
-  console.log(req.params.categoryId);
   const subject = await Subject.findOneAndUpdate(
     req.params.categoryId,
     req.body,

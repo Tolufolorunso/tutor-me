@@ -23,7 +23,6 @@ const subjectSchema = new mongoose.Schema({
 });
 
 subjectSchema.pre("save", async function (next) {
-  console.log(this);
   next();
 });
 

@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
+const compression = require("compression");
 
 //modules
 const AppError = require("./utils/appError");
@@ -48,6 +49,8 @@ app.use("/api/v1/lessons", lessonsRouter);
 app.use("/api/v1/categories", categoryRouter);
 
 app.use("/api/v1/users", adminRouter);
+
+app.use(compression());
 
 //HOMEPAGE route
 app.get("/", (req, res) => {
