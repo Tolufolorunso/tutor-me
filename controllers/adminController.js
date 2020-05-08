@@ -1,7 +1,6 @@
 const Category = require("../models/categoryModel");
 const Subject = require("../models/subjectsModel");
 const User = require("../models/userModel");
-const Helper = require("../utils/helperFunction");
 const Api = require("../utils/api");
 
 const AppError = require("../utils/appError");

@@ -1,6 +1,6 @@
 const Category = require("../models/categoryModel");
 const Subject = require("../models/subjectsModel");
-const Lesson = require("../models/LessonsModel");
+const Lesson = require("../models/lessonsModel");
 
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
