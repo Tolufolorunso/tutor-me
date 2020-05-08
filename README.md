@@ -1,4 +1,4 @@
-# WORKING NOW: heroku link is https://tranquil-dusk-39240.herokuapp.com/api/v1/auth/login
+# WORKING NOW: heroku link is https://tutor-me-app.herokuapp.com/api/v1/auth/login
 
 # Tutor-me App
 
