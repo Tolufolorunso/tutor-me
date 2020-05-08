@@ -1,7 +1,7 @@
-const Category = require("../models/categoryModel");
-const Subject = require("../models/subjectsModel");
-const AppError = require("../utils/appError");
-const catchAsync = require("../utils/catchAsync");
+const Category = require("./../models/categoryModel");
+const Subject = require("./../models/subjectsModel");
+const AppError = require("./../utils/appError");
+const catchAsync = require("./../utils/catchAsync");
 
 exports.getCategory = catchAsync(async (req, res) => {
   const category = await Category.find();

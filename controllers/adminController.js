@@ -1,10 +1,10 @@
-const Category = require("../models/categoryModel");
-const Subject = require("../models/subjectsModel");
-const User = require("../models/userModel");
-const Api = require("../utils/api");
+const Category = require("./../models/categoryModel");
+const Subject = require("./../models/subjectsModel");
+const User = require("./../models/userModel");
+const Api = require("./../utils/api");
 
-const AppError = require("../utils/appError");
-const catchAsync = require("../utils/catchAsync");
+const AppError = require("./../utils/appError");
+const catchAsync = require("./../utils/catchAsync");
 
 exports.getAllTutors = catchAsync(async (req, res, next) => {
   // const tutors = await User.find({ role: "tutor" }).select("-__v");

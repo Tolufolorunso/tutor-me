@@ -1,10 +1,10 @@
-const Subject = require("../models/subjectsModel");
-const Category = require("../models/categoryModel");
-const Helper = require("../utils/helperFunction");
-const AppError = require("../utils/appError");
-const catchAsync = require("../utils/catchAsync");
-const Api = require("../utils/api");
-const User = require("../models/userModel");
+const Subject = require("./../models/subjectsModel");
+const Category = require("./../models/categoryModel");
+const Helper = require("./../utils/helperFunction");
+const AppError = require("./../utils/appError");
+const catchAsync = require("./../utils/catchAsync");
+const Api = require("./../utils/api");
+const User = require("./../models/userModel");
 
 exports.getAllSubject = catchAsync(async (req, res) => {
   // const subject = await Subject.find();

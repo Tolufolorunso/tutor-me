@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
-const User = require("../models/userModel");
-const AppError = require("../utils/appError");
-const catchAsync = require("../utils/catchAsync");
+const User = require("./../models/userModel");
+const AppError = require("./../utils/appError");
+const catchAsync = require("./../utils/catchAsync");
 
 exports.signupUser = catchAsync(async (req, res, next) => {
   req.body.role = "user";

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const authController = require("../controllers/authController");
-const lessonsController = require("../controllers/lessonsController");
-const { getLesson } = require("../utils/middleware");
+const authController = require("./../controllers/authController");
+const lessonsController = require("./../controllers/lessonsController");
+const { getLesson } = require("./../utils/middleware");
 
 router
   .route("/")

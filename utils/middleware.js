@@ -1,6 +1,6 @@
-const Lesson = require("../models/lessonsModel");
-const User = require("../models/userModel");
-const AppError = require("../utils/appError");
+const Lesson = require("./../models/lessonsModel");
+const User = require("./../models/userModel");
+const AppError = require("./../utils/appError");
 
 class Middleware {
   async getLesson(req, res, next) {

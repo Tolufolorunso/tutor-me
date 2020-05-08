@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const subjectsController = require("../controllers/subjectsController");
-const Subject = require("../models/subjectsModel");
-const AppError = require("../utils/appError");
-const authController = require("../controllers/authController");
+const subjectsController = require("./../controllers/subjectsController");
+const Subject = require("./../models/subjectsModel");
+const AppError = require("./../utils/appError");
+const authController = require("./../controllers/authController");
 
 router
   .route("/")

@@ -1,9 +1,9 @@
-const Category = require("../models/categoryModel");
-const Subject = require("../models/subjectsModel");
-const Lesson = require("../models/lessonsModel");
+const Category = require("./../models/categoryModel");
+const Subject = require("./../models/subjectsModel");
+const Lesson = require("./../models/lessonsModel");
 
-const AppError = require("../utils/appError");
-const catchAsync = require("../utils/catchAsync");
+const AppError = require("./../utils/appError");
+const catchAsync = require("./../utils/catchAsync");
 
 exports.getAllLessons = catchAsync(async (req, res, next) => {
   const lessons = await Lesson.find().populate("userID tutorID subject").exec();

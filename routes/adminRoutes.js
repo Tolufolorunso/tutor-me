@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const authController = require("../controllers/authController");
-const adminController = require("../controllers/adminController");
-const User = require("../models/userModel");
-const { getATutor } = require("../utils/middleware");
+const authController = require("./../controllers/authController");
+const adminController = require("./../controllers/adminController");
+const User = require("./../models/userModel");
+const { getATutor } = require("./../utils/middleware");
 
 router.get("/", authController.authorize, async (req, res, next) => {
   const user = await User.findById(req.user._id).select("-__v");
