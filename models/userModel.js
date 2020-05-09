@@ -23,11 +23,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide password"],
     minlength: 2,
-    select: false,
+    // select: false,
+    trim: true,
   },
   passwordConfirm: {
     type: String,
     required: [true, "Please provide password"],
+    trim: true,
+    validate: {
+      validator: function (el) {
+        return el === this.password;
+      },
+      message: "Please, Passwords are not the same",
+    },
   },
   role: {
     type: String,
@@ -78,9 +86,16 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   return false;
 };
 
+//Not to show Deactivated tutors or user
 userSchema.pre("find", function (next) {
   this.find({ active: { $ne: false } });
   next();
 });
+
+userSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 module.exports = mongoose.model("User", userSchema);
