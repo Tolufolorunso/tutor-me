@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const compression = require("compression");
+const sanitizeData = require("express-mongo-sanitize");
+const xss = require("xss-clean");
 
 //modules
 const AppError = require("./utils/appError");
@@ -37,6 +39,8 @@ const limiter = rateLimit({
 });
 
 app.use("/api", limiter);
+app.use(sanitizeData());
+app.use(xss());
 app.use(express.json());
 
 app.use("/api/v1/auth", authRouter);
