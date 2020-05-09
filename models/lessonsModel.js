@@ -18,7 +18,7 @@ const lessonSchema = new mongoose.Schema({
   },
   subject: {
     type: mongoose.Schema.ObjectId,
-    ref: "User",
+    ref: "Subject",
     required: true,
   },
   createdAt: {
