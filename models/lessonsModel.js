@@ -25,6 +25,9 @@ const lessonSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  leasonAt: {
+    type: Date,
+  },
   select: false,
 });
 
