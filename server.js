@@ -12,7 +12,7 @@ const DB = process.env.DATABASE;
 // process.env.DATABASE_LOCAL
 
 mongoose
-  .connect(process.env.DATABASE_LOCAL, {
+  .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
