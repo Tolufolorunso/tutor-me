@@ -31,10 +31,10 @@ exports.createALesson = catchAsync(async (req, res, next) => {
     return result.toDateString();
   }
 
-  req.body.lessonDate = addDays(currentDate, differenceInDays + 1);
+  req.body.lessonDate = addDays(currentDate, differenceInDays);
   req.body.user = `${req.user.surname} ${req.user.firstname}`;
   req.body.userID = `${req.user._id}`;
-
+  console.log(req.body);
   const lesson = await Lesson.create(req.body);
   if (!lesson) {
     return next(new AppError("lesson error", 404));

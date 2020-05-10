@@ -697,6 +697,12 @@ status code: 200 Ok
 //URL is
 /api/v1/lessons
 
+{
+	"tutorID": "5eb3f91e1140d50f707cf74a",
+	"subjectID": "5eb2e8704ead962ba8c32576",
+	"lessonDate": "05/15/2020"
+}
+
 Response is
 status code: 200 Ok
 
@@ -706,7 +712,7 @@ status code: 200 Ok
         "lesson": {
             "_id": "5eb55ae9a21aac2d44fc7fae",
             "tutorID": "5eb3f91e1140d50f707cf74a",
-            "subject": "5eb2e8704ead962ba8c32576",
+            "subjectID": "5eb2e8704ead962ba8c32576",
             "user": "Folorunso Tolulope",
             "userID": "5eb3f892931fb41258500aa7",
             "createdAt": "2020-05-08T13:13:13.579Z",
