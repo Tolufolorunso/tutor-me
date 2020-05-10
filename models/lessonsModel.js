@@ -16,7 +16,7 @@ const lessonSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  subject: {
+  subjectID: {
     type: mongoose.Schema.ObjectId,
     ref: "Subject",
     required: true,
@@ -25,10 +25,10 @@ const lessonSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  leasonAt: {
+  lessonDate: {
     type: Date,
+    required: [true, "Choose the lesson date"],
   },
-  select: false,
 });
 
 const Lesson = mongoose.model("Lesson", lessonSchema);

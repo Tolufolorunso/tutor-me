@@ -19,9 +19,22 @@ exports.getAllLessons = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createLesson = catchAsync(async (req, res, next) => {
+exports.createALesson = catchAsync(async (req, res, next) => {
+  const currentDate = new Date().getTime();
+  const userInputDate = new Date(req.body.lessonDate).getTime();
+  const differenceInTime = userInputDate - currentDate;
+  const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
+  function addDays(date, days) {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result.toDateString();
+  }
+
+  req.body.lessonDate = addDays(currentDate, differenceInDays + 1);
   req.body.user = `${req.user.surname} ${req.user.firstname}`;
   req.body.userID = `${req.user._id}`;
+
   const lesson = await Lesson.create(req.body);
   if (!lesson) {
     return next(new AppError("lesson error", 404));

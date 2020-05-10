@@ -37,6 +37,15 @@ const userSchema = new mongoose.Schema({
       message: "Please, Passwords are not the same",
     },
   },
+  phone: {
+    type: String,
+    validate: {
+      validator: function (val) {
+        return /[0]\d{10}$/.test(val);
+      },
+      message: (props) => `${props.value} is not a valid phone number`,
+    },
+  },
   role: {
     type: String,
     required: true,
