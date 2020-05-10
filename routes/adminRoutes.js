@@ -28,7 +28,12 @@ router
 
 router
   .route("/get-tutors/:tutorId")
-  .get(authController.authorize, getATutor, adminController.getTutor)
+  .get(
+    authController.authorize,
+    authController.authorizeFor("admin", "user"),
+    getATutor,
+    adminController.getTutor
+  )
   .delete(
     authController.authorize,
     authController.authorizeFor("admin"),

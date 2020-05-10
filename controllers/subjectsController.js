@@ -8,10 +8,10 @@ const User = require("./../models/userModel");
 
 exports.getAllSubject = catchAsync(async (req, res) => {
   // const subject = await Subject.find();
-
-  const subjects = new Api(Subject.find(), req.query).filter().sort("name");
+  const subjects = new Api(Subject.find(), req.query)
+    .filter()
+    .sort(req.query.sort);
   const subject = await subjects.query;
-
   res.status(200).json({
     status: "success",
     results: subject.length,

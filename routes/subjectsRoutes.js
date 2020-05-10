@@ -7,7 +7,7 @@ const authController = require("./../controllers/authController");
 
 router
   .route("/")
-  .get(authController.authorize, subjectsController.getAllSubject)
+  .get(subjectsController.getAllSubject)
   .post(
     authController.authorize,
     authController.authorizeFor("admin"),
