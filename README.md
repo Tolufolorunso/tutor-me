@@ -191,19 +191,20 @@ app.all("*", (req, res, next) => {
 }
 ```
 
-### Create Category Using Post
+### Create Category Using HTTP POST method
 
 - Only Admin can create Category
 
 ```
 //URL is
 /api/v1/categories
+
 {
 	"name": "primary",
 	"description": "This is primary class category"
 }
-Response is
-status code is 201 created
+- Response is
+- status code: 201 Created
 {
     "status": "success",
     "data": {
@@ -218,7 +219,7 @@ status code is 201 created
 }
 ```
 
-### Get Category Using HTTP GET
+### Get Category Using HTTP GET Method
 
 - all users can retrive Category
 
@@ -227,6 +228,7 @@ status code is 201 created
 /api/v1/categories
 
 - Response is
+- Status code: 200 Ok
 
 {
     "status": "success",
@@ -247,9 +249,10 @@ status code is 201 created
                 "date": "2020-05-06T05:28:45.817Z",
                 "__v": 0
             },
+   ...........
 ```
 
-### Update Category Using HTTP PATCH
+### Update Category Using HTTP PATCH method
 
 - Only Admin can update Category
 
@@ -258,10 +261,15 @@ status code is 201 created
 
 /api/v1/categories/${_id}
 
+- Response is
+- Status code: 200 Ok
+
+
 {
 	"name": "primary",
 	"description": "This is primary class category"
 }
+
 ```
 
 ### Delete Category Using HTTP DELETE
@@ -272,10 +280,14 @@ This endpoint will delete all the Subjects under the category.
 //URL is
 /api/v1/categories/${_id}
 
+- Response is
+- Status code: 204 Ok
+
 {
 	"name": "primary",
 	"description": "This is primary class category"
 }
+
 ```
 
 ### Get all subject under a Category Using HTTP GET
@@ -285,6 +297,7 @@ This endpoint will delete all the Subjects under the category.
 /api/v1/categories/${categoryID}/subjects
 
 - Response is
+- Status code: 200 Ok
 
 {
     "status": "success",
