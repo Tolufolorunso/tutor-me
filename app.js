@@ -6,6 +6,8 @@ const cors = require("cors");
 const compression = require("compression");
 const sanitizeData = require("express-mongo-sanitize");
 const xss = require("xss-clean");
+const helmet = require("helmet");
+const hpp = require("hpp");
 
 //modules
 const AppError = require("./utils/appError");
@@ -24,6 +26,7 @@ dotenv.config({
 const app = express();
 
 //middleware
+app.use(helmet());
 app.use(cors());
 
 app.options("*", cors());
@@ -41,7 +44,11 @@ const limiter = rateLimit({
 app.use("/api", limiter);
 app.use(sanitizeData());
 app.use(xss());
-app.use(express.json());
+
+//prevent parameter pollution
+app.use(hpp());
+
+app.use(express.json({ limit: "10kb" }));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", adminRouter);
