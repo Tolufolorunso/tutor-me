@@ -84,7 +84,7 @@ app.all("*", (req, res, next) => {
 - For new Tutor to register
 
 ```
-//URL is
+//Endpoint is
 
 /api/v1/auth/signup/tutor
 {
@@ -119,7 +119,7 @@ app.all("*", (req, res, next) => {
 - For new Student to register
 
 ```
-//URL is
+//Endpoint is
 
 /api/v1/auth/signup/user
 {
@@ -154,7 +154,7 @@ app.all("*", (req, res, next) => {
 - For login
 
 ```
-//URL is
+//Endpoint is
 
 /api/v1/auth/login
 {
@@ -181,7 +181,7 @@ app.all("*", (req, res, next) => {
 }
 ```
 
-### The base url
+### The base Endpoint
 
 ```
 '/'
@@ -196,7 +196,7 @@ app.all("*", (req, res, next) => {
 - Only Admin can create Category
 
 ```
-//URL is
+//Endpoint is
 /api/v1/categories
 
 {
@@ -224,7 +224,7 @@ app.all("*", (req, res, next) => {
 - all users can retrive Category
 
 ```
-//URL is
+//Endpoint is
 /api/v1/categories
 
 - Response is
@@ -257,7 +257,7 @@ app.all("*", (req, res, next) => {
 - Only Admin can update Category
 
 ```
-//URL is
+//Endpoint is
 
 /api/v1/categories/${_id}
 
@@ -277,27 +277,22 @@ app.all("*", (req, res, next) => {
 This endpoint will delete all the Subjects under the category.
 
 ```
-//URL is
+//Endpoint is
 /api/v1/categories/${_id}
-
-- Response is
-- Status code: 204 Ok
 
 {
 	"name": "primary",
 	"description": "This is primary class category"
 }
-
 ```
 
 ### Get all subject under a Category Using HTTP GET
 
 ```
-//URL is
+//Endpoint is
 /api/v1/categories/${categoryID}/subjects
 
 - Response is
-- Status code: 200 Ok
 
 {
     "status": "success",
@@ -329,7 +324,7 @@ This endpoint will delete all the Subjects under the category.
 - Only Admin can update subject in a Category
 
 ```
-//URL is
+//Endpoint is
 /api/v1/categories/${categoryId}/subjects/${subjectId}
 {
 	"name": "agric",
@@ -349,10 +344,11 @@ This endpoint will delete all the Subjects under the category.
 - Only Admin can delete subject in a Category
 
 ```
-//URL is
+//Endpoint is
 /api/v1/categories/${categoryId}/subjects/${subjectId}
 
 - Response is
+- Status code: 204 No content
 
 {
     "status": "success",
@@ -363,7 +359,7 @@ This endpoint will delete all the Subjects under the category.
 ### Get a subject under a Category Using HTTP GET
 
 ```
-//URL is
+//Endpoint is
 /api/v1/categories/${categoryId}/subjects/${subjectId}
 
 - Response is
@@ -385,7 +381,7 @@ This endpoint will delete all the Subjects under the category.
 ### Create Subject Using HTTP POST method
 
 ```
-//URL is
+//Endpoint is
 /api/v1/subjects
 {
 	"name": "biology",
@@ -410,12 +406,12 @@ This endpoint will delete all the Subjects under the category.
 ### Get all Subjects Using HTTP GET method
 
 ```
-//URL is
+//Endpoint is
 
 /api/v1/subjects
 
 - Response is
-- status code: 201 Created
+- status code: 200 Ok
 
 {
     "status": "success",
@@ -449,7 +445,7 @@ This endpoint will delete all the Subjects under the category.
 ### Seacrh and sort Subjects Using category name and subject name
 
 ```
-//URL is
+//Endpoint is
 
 api/v1/subjects?category_name=${category_name}&sort=${subjectName}
 
@@ -483,7 +479,7 @@ api/v1/subjects?category_name=${category_name}&sort=${subjectName}
 - Only Admin can create Category
 
 ```
-//URL is
+//Endpoint is
 /api/v1/users
 {
 	"name": "primary",
@@ -512,7 +508,7 @@ status code: 200 Ok
 - Admin and students can get(search) Tutors
 
 ```
-//URL is
+//Endpoint is
 /api/v1/users/get-tutors
 
 - Response is
@@ -549,7 +545,7 @@ status code: 200 Ok
 - Admin and students can get(search) Tutors (search by firstname and/or sort in ascending order)
 
 ```
-//URL is
+//Endpoint is
 /api/v1/users/get-tutors?sort=firstname&firstname=${firstname}
 
 - Response is
@@ -588,7 +584,7 @@ status code: 200 Ok
 - Admin and students can get a tutor
 
 ```
-//URL is
+//Endpoint is
 /api/v1/users/get-tutors/${tutorId}
 
 Response is
@@ -615,7 +611,7 @@ status code: 200 Ok
 - only Admin can delete a tutor
 
 ```
-//URL is
+//Endpoint is
 /api/v1/users/get-tutors/${tutorId}
 
 Response is
@@ -633,7 +629,7 @@ status code: 200 Ok
 - Admin and tutor can register for a subject
 
 ```
-//URL is
+//Endpoint is
 /api/v1/subjects/register/${subjectId}
 
 Response is
@@ -650,7 +646,7 @@ status code: 200 Ok
 - Admin and tutor can retrive registered subject
 
 ```
-//URL is
+//Endpoint is
 /api/v1/subjects/tutor/subjects
 
 - Response is
@@ -690,7 +686,7 @@ status code: 200 Ok
 - Tuutor and admin can delete a regiestered subject
 
 ```
-//URL is
+//Endpoint is
 /api/v1/subjects/tutor/subjects/${subjectId}
 
 Response is
@@ -707,7 +703,7 @@ status code: 200 Ok
 -
 
 ```
-//URL is
+//Endpoint is
 /api/v1/lessons
 
 {
@@ -740,7 +736,7 @@ status code: 200 Ok
 -
 
 ```
-//URL is
+//Endpoint is
 /api/v1/lessons
 
 Response is
@@ -767,7 +763,7 @@ status code: 200 Ok
 - Only admin can retrive a lesson
 
 ```
-//URL is
+//Endpoint is
 /api/v1/lessons/${lessonId}
 
 Response is
@@ -794,7 +790,7 @@ status code: 200 Ok
 - Only admin can delete a lesson
 
 ```
-//URL is
+//Endpoint is
 /api/v1/lessons/${lessonId}
 
 Response is
@@ -812,7 +808,7 @@ status code: 200 Ok
 - Only admin can update a lesson
 
 ```
-//URL is
+//Endpoint is
 /api/v1/lessons/${lessonId}
 
 {

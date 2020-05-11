@@ -93,9 +93,10 @@ exports.deleteSubjectInCategory = catchAsync(async (req, res, next) => {
 
   await Subject.findByIdAndDelete(subjectId);
 
-  res.status(200).json({
+  res.status(204).json({
     status: "success",
     message: "Data deleted successfully",
+    data: null,
   });
 });
 

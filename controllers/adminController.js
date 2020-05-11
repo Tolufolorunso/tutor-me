@@ -40,10 +40,9 @@ exports.getTutor = catchAsync(async (req, res, next) => {
 exports.deactivateTutor = catchAsync(async (req, res, next) => {
   res.tutor.active = false;
   await res.tutor.save({ validateBeforeSave: false });
-  res.status(200).json({
+  res.status(204).json({
     status: "success",
-    data: {
-      message: "User deleted successfully",
-    },
+    message: "User deleted successfully",
+    data: null,
   });
 });

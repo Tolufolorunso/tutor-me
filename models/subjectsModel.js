@@ -7,6 +7,7 @@ const subjectSchema = new mongoose.Schema({
     trim: true,
     min: [4, "Name is too short!"],
     max: 40,
+    uppercase: true,
   },
   category_name: {
     type: String,

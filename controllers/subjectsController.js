@@ -55,13 +55,22 @@ exports.deleteTutorSubjects = catchAsync(async (req, res, next) => {
   if (!deletedSubject.subjects.length) {
     return next(new AppError("No subject to be deleted", 400));
   }
-  res.status(200).json({
+  res.status(204).json({
     status: "success",
     message: "Deleted successfully",
+    data: null,
   });
 });
 
 exports.createSubject = catchAsync(async (req, res, next) => {
+  const subjectExistsInCategory = await Subject.findOne({
+    name: req.body.name.toUpperCase(),
+    category_name: req.body.category_name.toUpperCase(),
+  });
+  if (subjectExistsInCategory) {
+    return next(new AppError("Subject exists in the category", 400));
+  }
+
   const newSubject = await Subject.create(req.body);
   Category.findOne(
     {
