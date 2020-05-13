@@ -5,9 +5,9 @@ const AppError = require("./../utils/appError");
 const catchAsync = require("./../utils/catchAsync");
 
 exports.signupUser = catchAsync(async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   req.body.role = "user";
-  console.log(req.body);
+  // console.log(req.body);
   const newUser = await await User.create(req.body);
   const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,

@@ -26,7 +26,11 @@ const lessonSchema = new mongoose.Schema({
     default: Date.now,
   },
   lessonDate: {
-    type: Date,
+    type: String,
+    required: [true, "Choose the lesson date"],
+  },
+  phone: {
+    type: String,
     required: [true, "Choose the lesson date"],
   },
 });

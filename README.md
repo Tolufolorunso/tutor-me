@@ -713,7 +713,7 @@ status code: 200 Ok
 }
 
 Response is
-status code: 200 Ok
+status code: 201 Created
 
 {
     "status": "success",
@@ -744,18 +744,44 @@ status code: 200 Ok
 
 {
     "status": "success",
+    "result": 1,
     "data": {
-        "lesson": {
-            "_id": "5eb55ae9a21aac2d44fc7fae",
-            "tutorID": "5eb3f91e1140d50f707cf74a",
-            "subject": "5eb2e8704ead962ba8c32576",
-            "user": "Folorunso Tolulope",
-            "userID": "5eb3f892931fb41258500aa7",
-            "createdAt": "2020-05-08T13:13:13.579Z",
-            "__v": 0
-        }
+        "lessons": [
+            {
+                "_id": "5ebbdef91f13ee05b403cf3e",
+                "tutorID": {
+                    "active": true,
+                    "subjects": [
+                        "5eb3eccef7f4ae299cbdb0aa"
+                    ],
+                    "_id": "5eb3f9341140d50f707cf74b",
+                    "firstname": "ola",
+                    "surname": "ojo",
+                    "email": "o@yahoo.com",
+                    "role": "tutor",
+                    "__v": 0
+                },
+                "subjectID": "5eb3eccef7f4ae299cbdb0aa",
+                "lessonDate": "Wed May 20 2020",
+                "phone": "08089877588",
+                "userID": {
+                    "active": true,
+                    "subjects": [],
+                    "_id": "5eb3f892931fb41258500aa7",
+                    "firstname": "Tolulope",
+                    "surname": "Folorunso",
+                    "email": "admin@yahoo.com",
+                    "role": "admin",
+                    "__v": 0
+                },
+                "user": "tolu folorunso",
+                "createdAt": "2020-05-13T11:50:17.126Z",
+                "__v": 0
+            }
+        ]
     }
 }
+.................
 ```
 
 ### Admin can retrive a lesson Using HTTP GET method
@@ -773,12 +799,14 @@ status code: 200 Ok
     "status": "success",
     "data": {
         "lesson": {
-            "_id": "5eb55ae9a21aac2d44fc7fae",
-            "tutorID": "5eb3f91e1140d50f707cf74a",
-            "subject": "5eb2e8704ead962ba8c32576",
-            "user": "Folorunso Tolulope",
+            "_id": "5ebbdef91f13ee05b403cf3e",
+            "tutorID": "5eb3f9341140d50f707cf74b",
+            "subjectID": "5eb3eccef7f4ae299cbdb0aa",
+            "lessonDate": "Wed May 20 2020",
+            "phone": "08089877588",
             "userID": "5eb3f892931fb41258500aa7",
-            "createdAt": "2020-05-08T13:13:13.579Z",
+            "user": "tolu folorunso",
+            "createdAt": "2020-05-13T11:50:17.126Z",
             "__v": 0
         }
     }
@@ -812,7 +840,9 @@ status code: 200 Ok
 /api/v1/lessons/${lessonId}
 
 {
-	"user": "tolu folorunso"
+	"user": "tolu folorunso",
+	"lessonDate": "05/20/2020",
+	"phone": "08089877588"
 }
 
 Response is
@@ -823,12 +853,14 @@ status code: 200 Ok
     "message": "Lesson updated successfully",
     "data": {
         "updatedLesson": {
-            "_id": "5eb55d94a21aac2d44fc7faf",
-            "tutorID": "5eb3f91e1140d50f707cf74a",
-            "subject": "5eb2e8704ead962ba8c32576",
-            "user": "tolu folorunso",
+            "_id": "5ebbdef91f13ee05b403cf3e",
+            "tutorID": "5eb3f9341140d50f707cf74b",
+            "subjectID": "5eb3eccef7f4ae299cbdb0aa",
+            "lessonDate": "Wed May 20 2020",
+            "phone": "08089877588",
             "userID": "5eb3f892931fb41258500aa7",
-            "createdAt": "2020-05-08T13:24:36.589Z",
+            "user": "tolu folorunso",
+            "createdAt": "2020-05-13T11:50:17.126Z",
             "__v": 0
         }
     }

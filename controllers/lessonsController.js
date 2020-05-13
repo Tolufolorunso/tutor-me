@@ -1,5 +1,3 @@
-const Category = require("./../models/categoryModel");
-const Subject = require("./../models/subjectsModel");
 const Lesson = require("./../models/lessonsModel");
 
 const AppError = require("./../utils/appError");
@@ -19,27 +17,33 @@ exports.getAllLessons = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createALesson = catchAsync(async (req, res, next) => {
-  const currentDate = new Date().getTime();
-  const userInputDate = new Date(req.body.lessonDate).getTime();
-  const differenceInTime = userInputDate - currentDate;
-  const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+exports.bookLesson = catchAsync(async (req, res, next) => {
+  // const currentDate = new Date().getTime();
+  // const userInputDate = new Date(req.body.lessonDate).getTime();
+  // const differenceInTime = userInputDate - currentDate;
+  // const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
 
-  function addDays(date, days) {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result.toDateString();
+  const lessonDate = new Date(req.body.lessonDate).toDateString();
+
+  // function addDays(date, days) {
+  //   const result = new Date(date);
+  //   result.setDate(result.getDate() + days);
+  //   return result.toDateString();
+  // }
+  if (!req.user.phone) {
+    req.body.phone = req.body.phone;
+  } else {
+    req.body.phone = req.user.phone;
   }
-
-  req.body.lessonDate = addDays(currentDate, differenceInDays);
+  req.body.lessonDate = lessonDate;
+  req.body.userID = req.user._id;
   req.body.user = `${req.user.surname} ${req.user.firstname}`;
-  req.body.userID = `${req.user._id}`;
-  console.log(req.body);
+
   const lesson = await Lesson.create(req.body);
   if (!lesson) {
     return next(new AppError("lesson error", 404));
   }
-  res.status(200).json({
+  res.status(201).json({
     status: "success",
     data: {
       lesson,
@@ -65,8 +69,15 @@ exports.deleteALesson = catchAsync(async (req, res, next) => {
 });
 
 exports.updateALesson = catchAsync(async (req, res, next) => {
+  const lessonDate = new Date(req.body.lessonDate).toDateString();
   if (req.body.user != null) {
     res.lesson.user = req.body.user;
+  }
+  if (req.body.lessonDate != null) {
+    res.lesson.lessonDate = lessonDate;
+  }
+  if (req.body.phone != null) {
+    res.lesson.phone = req.body.phone;
   }
   const updatedLesson = await res.lesson.save();
   res.status(200).json({

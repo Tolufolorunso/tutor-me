@@ -11,7 +11,11 @@ router
     authController.authorizeFor("admin"),
     lessonsController.getAllLessons
   )
-  .post(authController.authorize, lessonsController.createALesson);
+  .post(
+    authController.authorize,
+    authController.authorizeFor("admin", "user"),
+    lessonsController.bookLesson
+  );
 
 router
   .route("/:id")
