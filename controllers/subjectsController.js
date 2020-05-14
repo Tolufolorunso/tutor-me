@@ -63,14 +63,6 @@ exports.deleteTutorSubjects = catchAsync(async (req, res, next) => {
 });
 
 exports.createSubject = catchAsync(async (req, res, next) => {
-  const subjectExistsInCategory = await Subject.findOne({
-    name: req.body.name.toUpperCase(),
-    category_name: req.body.category_name.toUpperCase(),
-  });
-  if (subjectExistsInCategory) {
-    return next(new AppError("Subject exists in the category", 400));
-  }
-
   const newSubject = await Subject.create(req.body);
   Category.findOne(
     {

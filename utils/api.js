@@ -8,7 +8,7 @@ module.exports = class Api {
     const queryObj = { ...this.queryString };
     const excludeFields = ["page", "sort", "limit", "field"];
     excludeFields.forEach((el) => delete queryObj[el]);
-    this.query.find(queryObj);
+    this.query.find(queryObj).select("-__v");
     return this;
   }
   sort(name) {

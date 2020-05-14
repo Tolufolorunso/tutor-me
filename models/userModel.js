@@ -96,7 +96,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 };
 
 //Not to show Deactivated tutors or user
-userSchema.pre("find", function (next) {
+userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
   next();
 });

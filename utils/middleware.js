@@ -25,14 +25,9 @@ class Middleware {
   async getATutor(req, res, next) {
     let tutor;
     try {
-      // tutor = await User.findOne({
-      //   role: "tutor",
-      //   _id: req.params.tutorId,
-      // });
-      tutor = await User.findById(req.params.tutorId);
-
+      tutor = await User.findById(req.params.tutorId).select("-__v");
       if (!tutor) {
-        return next(new AppError("something went wrong", 500));
+        return next(new AppError("Tutor not found or internal error", 500));
       }
     } catch (error) {
       return res.status(500).json({

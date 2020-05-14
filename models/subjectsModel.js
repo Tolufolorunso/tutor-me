@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const AppError = require("./../utils/appError");
 
 const subjectSchema = new mongoose.Schema({
   name: {
@@ -24,7 +25,16 @@ const subjectSchema = new mongoose.Schema({
 });
 
 subjectSchema.pre("save", async function (next) {
+  const subjectExistsInCategory = await Subject.findOne({
+    name: this.name.toUpperCase(),
+    category_name: this.category_name.toUpperCase(),
+  });
+  if (subjectExistsInCategory) {
+    return next(new AppError("Subject exists in the category", 400));
+  }
   next();
 });
 
-module.exports = mongoose.model("Subject", subjectSchema);
+const Subject = mongoose.model("Subject", subjectSchema);
+
+module.exports = Subject;
